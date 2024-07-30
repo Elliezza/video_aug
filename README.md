@@ -18,3 +18,6 @@ python process_video.py -c config.json -v ./test_input
 ```
 python gen_conf.py
 ```
+
+
+字体来自：[https://github.com/chengda/popular-fonts/]
