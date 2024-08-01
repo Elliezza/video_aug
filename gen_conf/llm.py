@@ -1,4 +1,4 @@
-from openai import OpenAI
+from openai import OpenAI 
 
 client = OpenAI(api_key="46318b2ca8bc4f379eeee37700c8970f" ,
                 base_url="http://modelhub.4pd.io/learnware/models/openai/4pd/api/v1")
@@ -8,8 +8,8 @@ def call_llm(prompt):
     res = client.chat.completions.create(
     model="public/waic-qwen2-72b-instruct-awq@main",
     messages=[{ "role": "user", "content": prompt }],
-    temperature=0.5,
-    max_tokens=4096,
+    temperature=1,
+    max_tokens=1200,
     top_p=1,
     stop=None,
     )
