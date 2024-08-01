@@ -42,7 +42,7 @@ def add_background_and_subtitle(video_path, background_color_code, output_path, 
     fps = cap.get(cv2.CAP_PROP_FPS)
     duration = total_frames / fps
     subtitles = subtitle_text.split('&')
-    subtitle_duration = (duration - 10) / len(subtitles)
+    subtitle_duration = (duration - 1) / len(subtitles)
 
     font_title = ImageFont.truetype(font_path, 50)
     font_subtitle = ImageFont.truetype(font_path, 36)
@@ -62,7 +62,7 @@ def add_background_and_subtitle(video_path, background_color_code, output_path, 
         title_frame = add_text_to_frame(combined_frame, title_text, font_title, (bg_width, 150), title_offset)
 
         # Add subtitles
-        if current_time < duration :
+        if current_time < duration - 1 :
             segment_index = int(current_time / subtitle_duration)
         else:
             segment_index = len(subtitles) - 1
