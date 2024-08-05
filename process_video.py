@@ -4,6 +4,7 @@ import os
 import subprocess
 from PIL import Image, ImageDraw, ImageFont
 import json, argparse
+import shutil
 
 def create_solid_color_image(color_code, size=(720, 1280), output_path='solid_color.png'):
     """
@@ -114,18 +115,20 @@ def extract_audio(video_path, audio_path):
     subprocess.call(command, shell=True)
 
 def combine_video_audio(video_path, audio_path, output_path):
-    command = f"ffmpeg/bin/ffmpeg.exe -i {video_path} -i {audio_path} -c:v copy -c:a aac {output_path}"
+    command = f"ffmpeg/bin/ffmpeg.exe -i {video_path} -i {audio_path} -c:v libx264 -c:a aac {output_path}"
     subprocess.call(command, shell=True)
 
-def process_videos(video_dir, video_filename, background_color_code, output_dir, title_text, subtitle_text, font_path):
+def process_videos(out_file, video_dir, video_filename, background_color_code, output_dir, title_text, subtitle_text, font_path):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
        
     if video_filename.endswith(('.mp4', '.mov', '.avi')):
-        video_path = os.path.join(video_dir, video_filename)
-        temp_video_path = os.path.join(output_dir, 'temp_' + video_filename)
-        audio_path = os.path.join(output_dir, 'audio_' + video_filename + '.aac')
-        output_path = os.path.join(output_dir, 'processed_' + video_filename)
+        ori_path = os.path.join(video_dir, video_filename)
+        video_path = os.path.join(output_dir, "input.mp4")
+        shutil.copy(ori_path, video_path)
+        temp_video_path = os.path.join(output_dir, 'temp_' + out_file)
+        audio_path = os.path.join(output_dir, 'audio_' + out_file + '.aac')
+        output_path = os.path.join(output_dir, out_file)
 
         extract_audio(video_path, audio_path)
         add_background_and_subtitle(video_path, background_color_code, temp_video_path, title_text, subtitle_text, font_path)
@@ -159,7 +162,7 @@ if __name__ == "__main__":
         title = config.get('title', ['《Viva La Vida》', '(西班牙语：生命万岁)'])
         subtitle = config.get('subtitle', '')
         font_path = config.get('font_path','font.ttf')  # Replace with the path to your TTF font file
-
+        outfile = config.get('file_title', video_name)
         # Print the extracted information (or use it as needed)
         print(f"视频目录: {video_directory}")
         print(f"视频名称: {video_name}")
@@ -168,5 +171,4 @@ if __name__ == "__main__":
         print(f"标题: {title}")
         print(f"字幕: {subtitle}")
    
-        process_videos(video_directory, video_name, background_color, output_directory, title, subtitle, font_path)
-
+        process_videos(outfile, video_directory, video_name, background_color, output_directory, title, subtitle, font_path)
