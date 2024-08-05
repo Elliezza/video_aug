@@ -1,0 +1,7 @@
+通过文件名"$FILE_NAME"生成视频标题，去除【】中的内容，去除.mp4。保留书名号等特殊字符。只回复生成的标题。
+
+范例：
+
+文件名：'【舞蹈】【横】【英】【1M】Woomin Jang编舞《Nice For What》.mp4.mp4'
+
+回复：Woomin Jang 编舞 《Nice For What》
