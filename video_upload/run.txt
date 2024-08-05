@@ -1,0 +1,3 @@
+python read_config_and_gen.py -c upload_content_dance.json -v ../output_dance/ -p ../gen_preview/dance_images/
+
+python read_config_and_gen.py -c upload_content_music.json -v ../output_music/ -p ../gen_preview/music_images/
