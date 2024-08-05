@@ -6,14 +6,16 @@ import time
 import subprocess
 
 publish_name = [
-{
-    "id": "2000000020",
-    "name": "小马哥与他的朋友们"
-    },
-{
-    "id": "2000000021",
-    "name": "云端的阿青"
-    }    
+{"id": "2000000022", "name": "慢悠悠的老张"},
+{"id": "2000000023", "name": "风中的小猪猪"},
+{"id": "2000000024", "name": "笑笑的疯狂旅行"},
+{"id": "2000000025", "name": "小胖墩与大海"},
+{"id": "2000000026", "name": "风中飘扬的叶子"},
+{"id": "2000000027", "name": "轻舞飞扬的乐乐"},
+{"id": "2000000028", "name": "叮当猫的世界"},
+{"id": "2000000029", "name": "漫步在云端的喵"},
+{"id": "2000000030", "name": "小林大世界"},
+{"id": "2000000031", "name": "喜欢喝茶的李小姐"}
 ]
 
 def select_name(rounds, choice):
@@ -40,6 +42,7 @@ def convert_video(input_file, output_file):
         print(f"Successfully converted {input_file} to {output_file}")
     except subprocess.CalledProcessError as e:
         print(f"Error converting {input_file} to {output_file}: {e}")
+
 
 
 def load_config(config_file):
@@ -82,14 +85,15 @@ if __name__ == "__main__":
             continue
         else:
             print("No File found, skipping")
-            print("-------------ERROR---------------")
+            #print(f"视频名称: {file_title}")
+            print("-------------ERROR--------------")
             continue 
 
-        
         print("Continue to work")
-        
+
         #convert_video(file_path,"temp.mp4")
         #video_url = upload_with_retry("temp.mp4", "video")
+        #img_url = upload_with_retry(screenshot_path, "img")
         video_url = upload_with_retry(file_path, "video")
         img_url = upload_with_retry(screenshot_path, "img")
 
@@ -104,6 +108,7 @@ if __name__ == "__main__":
         #video_duration = get_video_duration("temp.mp4")
         file_size = get_file_size(file_path)
         video_duration = get_video_duration(file_path)
+        
         print(file_size)
         print(video_duration)
 
@@ -120,8 +125,8 @@ if __name__ == "__main__":
     "duration": video_duration,
     "format":"mp4", 
     "size":file_size,
-    "categoryLevel1":"3", 
-    "categoryLevel2":"3",
+    "categoryLevel1":"2", 
+    "categoryLevel2":"2",
     "coverUrl":img_url,
     "publishId": publish_name[choice]['id'],
     "publishName": publish_name[choice]['name'],
