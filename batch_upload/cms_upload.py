@@ -2,7 +2,12 @@ from upload import upload_with_retry, upload_entry_with_retry
 from file_size import get_file_size, get_video_duration
 from category import get_category
 from publisher import get_publish_id
-from download import download_file_with_retry
+from download_2 import download_file_with_retry, remove_file
+import time
+
+def clean_up(path1, path2):
+    remove_file(path1)
+    remove_file(path2)
 
 def process_entry(config):
    
@@ -17,13 +22,14 @@ def process_entry(config):
         print(f"Failed to download file: {e}")
         return "Download Fail"
 
-    video_url = upload_with_retry(file_path, "video")
-    img_url = upload_with_retry(cover_path, "img")
+    video_url = file_path #upload_with_retry(file_path, "video")
+    img_url = cover_path #upload_with_retry(cover_path, "img")
+     
 
     if video_url == None or img_url == None:
         print(file_path)
         print("Fail to upload, skipping.....")
-        continue
+        return "Upload Fail"
 
     ori_cat = config['categoryLevel3New']
     cate1, cate2 = get_category(ori_cat)
@@ -32,8 +38,8 @@ def process_entry(config):
     video_duration = config['duration'] #get_video_duration(file_path)
 
     publishID, publishName = get_publish_id(ori_cat)
-
-         video_entry = {
+    
+    video_entry = {
              "itemType":"视频",
              "url": video_url,
              "country":"中国",
@@ -56,7 +62,9 @@ def process_entry(config):
              "source":" 渠道-1",
     }
 
-        print(video_entry)
-        res = upload_entry_with_retry(video_entry)
+    print(video_entry)
+    #res = upload_entry_with_retry(video_entry)
+    res = "test"
 
-        return res
+    clean_up(file_path, cover_path)
+    return res

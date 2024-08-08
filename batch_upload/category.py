@@ -22,7 +22,7 @@ cat_dict = {
 
 def get_category(ori_cat):
 
-    cate1 = cat_dict[ori_cat)][0]
-    cate2 = cat_dict[ori_cat)][1]
+    cate1 = cat_dict[ori_cat][0]
+    cate2 = cat_dict[ori_cat][1]
 
-    return cate1 cate2
+    return cate1, cate2

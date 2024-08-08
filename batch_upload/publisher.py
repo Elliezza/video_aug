@@ -1,7 +1,7 @@
 
 
 
-def get_publish_id(cat)
+def get_publish_id(cat):
 
     publishID = 1
     publishName = "Hello"
