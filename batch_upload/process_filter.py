@@ -3,10 +3,10 @@ from cms_upload import process_entry
 
 def read_input(input_file):
     data = []
-    with open(csv_file_path, mode='r', encoding='utf-8') as file:
-    reader = csv.DictReader(file)
-    for row in reader:
-        data.append(row)
+    with open(input_file, mode='r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            data.append(row)
     return data
 
 def initial_5w_upload(ori_data):

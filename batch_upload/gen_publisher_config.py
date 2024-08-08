@@ -1,0 +1,61 @@
+import json
+import csv
+import math
+
+if __name__ == "__main__":
+    output_file = "publisher_info.json"
+    csv_file = "filter.csv"
+
+    data = []
+    with open(csv_file, mode='r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            data.append(row)
+
+
+    publisher={}
+    for item in data:
+        if item['publisherName'] not in publisher: # == '锤砸在野':
+            publisher[item['publisherName']] = [ item ]
+        else:
+            publisher[item['publisherName']].append(item)
+
+    publisher_count={}
+
+    for item in data:
+        if item['publisherName'] not in publisher_count: # == '锤砸在野':
+            publisher_count[item['publisherName']] = 1
+        else:
+            publisher_count[item['publisherName']] += 1
+
+    sorted_dict_asc = dict(sorted(publisher_count.items(), key=lambda item: item[1]))
+
+    user_id = 1
+
+    config_dict = {}
+
+    for user in publisher_count.keys():
+        if publisher_count[user] < 201:
+            user_dict = {}
+            user_dict[user_id] = 0
+
+            config_dict[user] = [ user_dict ]
+            user_id +=1
+        else: # split into multiple accounts
+            number = math.ceil(publisher_count[user]/200)
+            config_dict[user] = [ ]
+            for i in range(number):
+                user_dict = {}
+                user_dict[user_id] = 0
+                user_id +=1
+                config_dict[user].append(user_dict)
+
+    try:
+        with open(output_file, 'w', encoding='utf-8') as file:
+            json.dump(config_dict, file, indent=4, ensure_ascii=False)  # Pretty-print JSON with indentation
+        print(f"Data successfully written to {output_file}")
+    except IOError as e:
+        print(f"Failed to write to file: {e}")
+
+
+    import pdb; pdb.set_trace()
