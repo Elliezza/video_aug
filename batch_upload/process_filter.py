@@ -31,4 +31,3 @@ if __name__ == "__main__":
     initial_5w_upload(data)
 
     #daily_1000_upload(data, 50000)
-    filter.csv
