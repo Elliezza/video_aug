@@ -12,9 +12,9 @@ def read_input(input_file):
     return sorted_data
 
 def initial_5w_upload(ori_data):
-    data = ori_data[:50000]
+    data = ori_data[14:50000]
     #data = ori_data[:50]
-    count = 0
+    count = 14
     for item in data:
         res = process_entry(item)
         print(res)
