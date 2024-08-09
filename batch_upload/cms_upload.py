@@ -12,7 +12,8 @@ def clean_up(path1, path2):
 def process_entry(config):
     ori_name = config['publisherName']
     publishID, publishName = get_publish_id(ori_name)
-    print(ori_name) 
+    print(ori_name)
+    print(config['updateAt'])
     print(publishID, publishName) 
 
     return "success"

@@ -6,11 +6,13 @@ if __name__ == "__main__":
     output_file = "publisher_info.json"
     csv_file = "filter.csv"
 
-    data = []
+    ori_data = []
     with open(csv_file, mode='r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            data.append(row)
+            ori_data.append(row)
+    #sort
+    data = sorted(ori_data, key=lambda x: x['updateAt'])
 
 
     publisher={}

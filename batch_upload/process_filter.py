@@ -7,7 +7,9 @@ def read_input(input_file):
         reader = csv.DictReader(file)
         for row in reader:
             data.append(row)
-    return data
+
+    sorted_data = sorted(data, key=lambda x: x['updateAt'])
+    return sorted_data
 
 def initial_5w_upload(ori_data):
     #data = ori_data[:50000]
