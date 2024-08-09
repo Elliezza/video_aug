@@ -10,6 +10,11 @@ def clean_up(path1, path2):
     remove_file(path2)
 
 def process_entry(config):
+    ori_name = config['publisherName']
+    publishID, publishName = get_publish_id(ori_name)
+    print(publishID, publishName) 
+
+def process_entry_2(config):
    
     video_download_url = config['url']
     cover_download_url = config['coverUrl']
@@ -37,7 +42,8 @@ def process_entry(config):
     file_size = get_file_size(file_path)
     video_duration = config['duration'] #get_video_duration(file_path)
 
-    publishID, publishName = get_publish_id(ori_cat)
+    ori_name = config['publisherName']
+    publishID, publishName = get_publish_id(ori_name)
     
     video_entry = {
              "itemType":"视频",

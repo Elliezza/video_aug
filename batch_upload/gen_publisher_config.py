@@ -35,20 +35,15 @@ if __name__ == "__main__":
     config_dict = {}
 
     for user in publisher_count.keys():
+        config_dict[user] = {}
         if publisher_count[user] < 201:
-            user_dict = {}
-            user_dict[user_id] = 0
-
-            config_dict[user] = [ user_dict ]
+            config_dict[user][user_id]= 0
             user_id +=1
         else: # split into multiple accounts
             number = math.ceil(publisher_count[user]/200)
-            config_dict[user] = [ ]
             for i in range(number):
-                user_dict = {}
-                user_dict[user_id] = 0
+                config_dict[user][user_id] = 0
                 user_id +=1
-                config_dict[user].append(user_dict)
 
     try:
         with open(output_file, 'w', encoding='utf-8') as file:
