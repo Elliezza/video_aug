@@ -9,7 +9,7 @@ def clean_up(path1, path2):
     remove_file(path1)
     remove_file(path2)
 
-def process_entry(config):
+def process_entry_test(config):
     ori_name = config['publisherName']
     publishID, publishName = get_publish_id(ori_name)
     print(ori_name)
@@ -18,7 +18,7 @@ def process_entry(config):
 
     return "success"
 
-def process_entry_2(config):
+def process_entry(config):
    
     video_download_url = config['url']
     cover_download_url = config['coverUrl']
@@ -31,8 +31,10 @@ def process_entry_2(config):
         print(f"Failed to download file: {e}")
         return "Download Fail"
 
-    video_url = file_path #upload_with_retry(file_path, "video")
-    img_url = cover_path #upload_with_retry(cover_path, "img")
+    #video_url = file_path #upload_with_retry(file_path, "video")
+    #img_url = cover_path #upload_with_retry(cover_path, "img")
+    video_url = upload_with_retry(file_path, "video")
+    img_url = upload_with_retry(cover_path, "img")
      
 
     if video_url == None or img_url == None:
@@ -73,8 +75,7 @@ def process_entry_2(config):
     }
 
     print(video_entry)
-    #res = upload_entry_with_retry(video_entry)
-    res = "test"
+    res = upload_entry_with_retry(video_entry)
 
     clean_up(file_path, cover_path)
     return res

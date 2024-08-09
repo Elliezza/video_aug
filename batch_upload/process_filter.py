@@ -12,18 +12,23 @@ def read_input(input_file):
     return sorted_data
 
 def initial_5w_upload(ori_data):
-    #data = ori_data[:50000]
-    data = ori_data[:5]
+    data = ori_data[:50000]
+    #data = ori_data[:50]
+    count = 0
     for item in data:
         res = process_entry(item)
         print(res)
-
+        count = count + 1
+        print(f"Uploaded count: {count}")
 
 def daily_1000_upload(data, start):
     data = ori_data[start:start+1000]
+    count = 0
     for item in data:
         res = process_entry(item)
         print(res)
+        count = count + 1
+        print(f"Uploaded count: {count}")
 
 if __name__ == "__main__":
 
