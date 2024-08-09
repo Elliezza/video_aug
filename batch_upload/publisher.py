@@ -17,7 +17,6 @@ def write_info(out_file, data):
 def get_id(name):
 
     data = read_info(info_file)
-    import pdb; pdb.set_trace() 
     entry_keys = list(data[name].keys())
     for i in range(len(entry_keys)):
         key = entry_keys[i]
@@ -49,7 +48,6 @@ def get_id_and_names(temp_id):
     users = read_txt_file(account_file)
     allocations = read_info(record_file)
 
-    import pdb; pdb.set_trace()
     if temp_id not in allocations:
         new_id = len(allocations.keys())
         allocations[temp_id] = users[new_id]
